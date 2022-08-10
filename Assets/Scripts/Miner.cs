@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Miner : MonoBehaviour
 {
-    public int goldPower;
-    public int goldUPCost;
-    public int mineTimeDecreaseCost;
+    protected int goldPower;
+    protected int goldUPCost;
+    protected int mineTimeDecreaseCost;
+    
+    protected float currentTime;
+    protected float mineTime;
 
-    public float currentTime;
-    public float mineTime;
+    public Mineral mineral;
 
     void Update()
     {
         currentTime += Time.deltaTime;
+        mineral = GameObject.Find("GoldPos").GetComponent<Mineral>();
         DigGold();
     }
 
@@ -30,7 +33,7 @@ public class Miner : MonoBehaviour
     {
         if (currentTime > mineTime)
         {
-            GameManager.instance.gold += goldPower;
+            GameManager.instance.gold += (goldPower + mineral.value_Mineral);
             currentTime = 0;
         }
     }

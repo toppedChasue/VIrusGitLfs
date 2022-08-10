@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public Transform bulletPos;
     public Transform originPos;
 
-    private float maxXpos = 15f;
+    private float maxXPos = 15f;
 
     Vector3 dir;
 
@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             Moving();
         }
 
-        if (transform.position.x > maxXpos)
+        if (transform.position.x > maxXPos)
         { //총알이 너무 멀리 벗어나지 않게 조절
             transform.position = originPos.position;
             //비활성화 전에 위치를 원래 위치로 조정
@@ -47,4 +47,6 @@ public class Bullet : MonoBehaviour
     {
         transform.position += dir.normalized * speed * Time.deltaTime;
     }
+
+
 }

@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour, IEnemy
         CurrentHp -= damage;
         if (CurrentHp <= 0)
         {
-            GameManager.instance.gold += gold;
+            GameManager.instance.gold += gold * GameManager.instance.stage;
             spwanVirus.enemies.Remove(this);
             GameManager.instance.enemyKillCount++;
             Destroy(gameObject);

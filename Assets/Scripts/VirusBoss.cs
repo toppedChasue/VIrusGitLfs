@@ -59,8 +59,8 @@ public class VirusBoss : Enemy
         col.radius = 1f; //콜라이더 크기 확대
         yield return new WaitForSeconds(0.1f);
         CurrentHp = hp + (heal /2); //힐
-        currentTime = 0; //쿨타임 초기화
         yield return new WaitForSeconds(5f);
+        currentTime = 0; //쿨타임 초기화
         virusFrontSpeed = speed; //원상복구
         virusUpDownSpeed = speed;
         col.radius = 0.5f;

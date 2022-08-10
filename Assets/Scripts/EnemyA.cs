@@ -18,9 +18,9 @@ public class EnemyA : Enemy
     protected override void Init()
     {
         base.Init();
-        gold = enemyGold * (GameManager.instance.stage / 5);
         CurrentHp = GameManager.instance.stage * 2;
         DP = (GameManager.instance.stage / 5) * (maxDp + 1);
         virusFrontSpeed = speed + (GameManager.instance.stage / 100);
+        gold = enemyGold;
     }
 }

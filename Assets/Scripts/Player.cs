@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform bulletPos;
     public float bulletSpeed;
+    public int bulletDamage;
     
     public float attackRange;
 
@@ -22,8 +23,6 @@ public class Player : MonoBehaviour
 
     private float currentTime;
     public float attacktTime;
-
-    List<Enemy> enemies = new List<Enemy>();
 
     public ObjectManager objectManager;
     private Bullet bulletObj;
@@ -75,6 +74,7 @@ public class Player : MonoBehaviour
             bulletObj.target = target;
             bulletObj.bulletPos = bulletPos;
             bulletObj.speed = bulletSpeed;
+            bulletObj.damage = bulletDamage;
             muzzle.color = new Color32(255, 255, 255, 255);
             arms.transform.localPosition += new Vector3(-0.01f, 0, 0);
             yield return new WaitForSeconds(0.1f);

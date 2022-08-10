@@ -21,7 +21,14 @@ public class BtnManger : MonoBehaviour
 
     //총알 관련 변수
     GameObject bulletParent;
+    private int BulletPowerUpCost;
 
+    private void Awake()
+    {
+        powerUpGold = 1000;
+        speedUpGold = 50;
+        BulletPowerUpCost = 100;
+    }
     public void Start()
     {
        bulletParent = GameObject.Find("BulletParent");
@@ -107,27 +114,20 @@ public class BtnManger : MonoBehaviour
     //Player Stats
     public void PowerUpBtn()
     {
-        switch (player.power)
-        {
-            case 0:
-                powerUpGold = 100;
-                break;
-            case 1:
-                powerUpGold = 500;
-                break;
-        }
-
-        if (player.power < 3 && GameManager.instance.gold >= powerUpGold)
+        if (GameManager.instance.gold >= powerUpGold && player.power <= 10)
         {
             player.power++;
             GameManager.instance.gold -= powerUpGold;
+            powerUpGold += powerUpGold;
         }
         else
+        {
             return;
+        }
+
     }
     public void AtkSpeedUpBtn()
     {
-        speedUpGold = 50;
         int gold = speedUpGold;
         if (GameManager.instance.gold >= gold)
         {
@@ -140,7 +140,6 @@ public class BtnManger : MonoBehaviour
     }
     public void BulletSpeedUpBtn()
     {
-        speedUpGold = 50;
         int gold = speedUpGold;
         if (GameManager.instance.gold >= gold)
         {
@@ -150,6 +149,15 @@ public class BtnManger : MonoBehaviour
         }
         else
             return;
+    }
+    public void BulletPowerUpBtn()
+    {
+        if (GameManager.instance.gold >= BulletPowerUpCost)
+        {
+            player.bulletDamage += 1;
+            GameManager.instance.gold -= BulletPowerUpCost;
+            BulletPowerUpCost += BulletPowerUpCost;
+        }
     }
 
     //Miner Ui
