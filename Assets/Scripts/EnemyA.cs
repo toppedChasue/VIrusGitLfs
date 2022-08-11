@@ -11,7 +11,7 @@ public class EnemyA : Enemy
     private void Awake()
     {
         Init();
-        player = FindObjectOfType<Player>();
+        //player = FindObjectOfType<Player>();
         spwanVirus = FindObjectOfType<SpwanVirus>();
     }
 

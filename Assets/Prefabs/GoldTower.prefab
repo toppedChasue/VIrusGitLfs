@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 405433671229041476}
   - component: {fileID: 6454605167612040206}
-  - component: {fileID: 3626082724307566275}
+  - component: {fileID: -1751871775269940197}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: GoldTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.96815324, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3626082724307566275
+--- !u!114 &-1751871775269940197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,6 +92,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6090431416567766617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73887089419125c45acc99b2ee54ed6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 683469cee94525045bb5a346ef72ff2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  towerName: GOLD
+  currentTime: 0
+  maxTime: 0
+  towersize: {x: 0, y: 0}
+  atk: 0
+  player: {fileID: 0}

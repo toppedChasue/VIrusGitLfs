@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public void SearchVirus()
     {
         Collider2D[] obj = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 9, transform.position.y), size, 0, layer);
-        List<Enemy> enemies = new List<Enemy>();
+        List<Enemy> enemies = new List<Enemy>();//리스트를 계속 갱신
         foreach (Collider2D enemycol in obj)
         {
             Enemy enemy1 = enemycol.GetComponent<Enemy>();
@@ -75,12 +75,17 @@ public class Player : MonoBehaviour
             bulletObj.bulletPos = bulletPos;
             bulletObj.speed = bulletSpeed;
             bulletObj.damage = bulletDamage;
-            muzzle.color = new Color32(255, 255, 255, 255);
-            arms.transform.localPosition += new Vector3(-0.01f, 0, 0);
+
+            AttackEffect(255, -0.01f);
             yield return new WaitForSeconds(0.1f);
-            muzzle.color = new Color32(255, 255, 255, 0);
-            arms.transform.localPosition += new Vector3(0.01f, 0, 0);
+            AttackEffect(255, 0.01f);
         }
+    }
+
+    private void AttackEffect(byte alpha, float x)
+    {
+        muzzle.color = new Color32(255, 255, 255, alpha);
+        arms.transform.localPosition += new Vector3(x, 0, 0);
     }
     void OnDrawGizmos()
     {//감지 범위 그려줌

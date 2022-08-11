@@ -2,40 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : Player
+public  enum  TowerType { ATK, BUFF, GOLD }
+
+public class Tower : MonoBehaviour
 {
-    //추상클래스로 구현해보기
     //타워의 종류 - 공격타워, 버프 & 디버프 타워, 골드타워,
+    public TowerType type;
 
-    public GameObject[] TowerPrefabs; //프리팹들
-    public Vector2 towersize; //범위 - 공격범위, 버프범위
-
+    public string towerName; //타워의 이름
     public float currentTime;
-    public float coolTime;
-    public int atk;
+    public float maxTime; //도달하면 액션
+    public Vector2 towersize; //범위 - 공격범위, 버프범위
+    public int atk; //공격력, 버프수치, 디버프수치, 골드 획득량
 
-    public Player player;
+    public SpwanVirus spwanVirus;
 
-    private void Awake()
-    {
-        player = GetComponent<Player>();
-    }
-
-    void Attack()
-    {
-        SearchVirus();
-    }
     //필요한것들
+    //타겟
     //공격 - 공격력, 공격범위, 공격속도, 
-    //버프 - 버프 증가량, 버프 지속시간, 버프 쿨타임, 버프 범위 - 아군타워, 플레이어, 디버프 범위 - 필드
+    //버프 - 버프 증가량, 버프 지속시간, 버프 쿨타임, 버프 범위 - (아군타워, 플레이어), 디버프 범위 - 필드
     //골드 - 골드 획득량, 골드 획득 쿨타임
 
-
     //타워가 해야할것
-    //공통 - 타겟설정, 쿨타임 돌리기, 액션, 
+    //공통 - 타겟, 쿨타임, 액션, 증가량
 
+    private void Update()
+    {
+        currentTime += Time.deltaTime;
+        if (currentTime >= maxTime)
+        {
+            TowerAction();
+        }
+    }
 
+    protected void TowerAction()
+    {
 
+    }
 
-
+    void OnDrawGizmos()
+    {//감지 범위 그려줌
+        Gizmos.color = Color.red;
+        switch (type)
+        {
+            case TowerType.ATK:
+                Gizmos.DrawRay(transform.localPosition, Vector3.right);
+                break;
+            case TowerType.BUFF:
+                Gizmos.DrawWireCube(transform.position, towersize);
+                break;
+        }
+    }
 }

@@ -9,12 +9,12 @@ interface IEnemy
     public float DP { get; set; }
 }
 
-public enum Type { A, B, C, D, BOSS}
+public enum enemyType { A, B, C, D, BOSS }
 public class Enemy : MonoBehaviour, IEnemy
 {
 
     public string enemyName;
-    public Type type;
+    public enemyType type;
     protected int gold;
 
     protected float virusFrontSpeed;
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Awake()
     {
         Init();
-        player = FindObjectOfType<Player>();
+        //player = FindObjectOfType<Player>();
         spwanVirus = FindObjectOfType<SpwanVirus>();
         inUnbeatable = false;
     }
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour, IEnemy
             transform.Translate(new Vector3(-virusFrontSpeed, virusUpDownSpeed) * Time.deltaTime);
             yield return null;
         }
-        while (transform.position.y > virusPos.y -0.4f)
+        while (transform.position.y > virusPos.y - 0.4f)
         {
             transform.Translate(new Vector3(-virusFrontSpeed, -virusUpDownSpeed) * Time.deltaTime);
             yield return null;
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void TakeDamage(float damage)
     {
         //방어력이 있으면, 체력 전에 방어력을 먼저 깎는다
-        
+
         if (DP > 0)
         {//방어력이 있고 0보다 크면
             DP -= damage;
@@ -91,30 +91,24 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
 
-            if(!inUnbeatable)
+            if (!inUnbeatable)
             {
-                if (bullet.b_hp >= 1)
-                {
-                    TakeDamage(bullet.damage);
-                    bullet.b_hp--;
-                    if (bullet.b_hp == 0)
-                    {
-                        collision.gameObject.SetActive(false);
-                        bullet.b_hp = 1;
-                        bullet.transform.position = bullet.originPos.position;
-                    }
-                }
+
+                TakeDamage(bullet.damage);
+
+                collision.gameObject.SetActive(false);
+                bullet.transform.position = bullet.originPos.position;
+
             }
             else
             {
                 collision.gameObject.SetActive(false);
-                bullet.b_hp= 1;
                 bullet.transform.position = bullet.originPos.position;
             }
         }
 
 
-        if(collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "Finish")
         {
             virusFrontSpeed = 0f;
         }

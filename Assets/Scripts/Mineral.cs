@@ -7,13 +7,14 @@ public class Mineral : MonoBehaviour
     public int value_Mineral;
     public int mineralCost;
 
-    //미네랄을 업그레이드 할때마다 광부들이 캐는 양에 더해줘야지
+    //UI에 나타내기 위한 변수가 필요한가?
     public void MineralUp()
     {
         if(GameManager.instance.gold >= mineralCost)
         {
-            value_Mineral += value_Mineral * (int)0.5f;
-            mineralCost += mineralCost;
+            value_Mineral += Mathf.RoundToInt(value_Mineral * 0.5f);
+            //Mathf.RoundToInt : 소숫점 첫번째 자리에서 반올림 int형 반환
+            mineralCost += Mathf.RoundToInt(mineralCost * 0.8f);
         }
     }
 

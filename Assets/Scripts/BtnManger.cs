@@ -21,13 +21,13 @@ public class BtnManger : MonoBehaviour
 
     //총알 관련 변수
     GameObject bulletParent;
-    private int BulletPowerUpCost;
+    private int BulletPowerUpGold;
 
     private void Awake()
     {
         powerUpGold = 1000;
         speedUpGold = 50;
-        BulletPowerUpCost = 100;
+        BulletPowerUpGold = 100;
     }
     public void Start()
     {
@@ -114,6 +114,7 @@ public class BtnManger : MonoBehaviour
     //Player Stats
     public void PowerUpBtn()
     {
+        //나중에 스킬 포인트로 바꾸자
         if (GameManager.instance.gold >= powerUpGold && player.power <= 10)
         {
             player.power++;
@@ -121,19 +122,16 @@ public class BtnManger : MonoBehaviour
             powerUpGold += powerUpGold;
         }
         else
-        {
             return;
-        }
-
     }
     public void AtkSpeedUpBtn()
     {
-        int gold = speedUpGold;
-        if (GameManager.instance.gold >= gold)
+        int gold = 200;
+        if (GameManager.instance.gold >= speedUpGold)
         {
             player.attacktTime -= 0.01f;
-            GameManager.instance.gold -= gold;
-            gold += gold * 2;
+            GameManager.instance.gold -= speedUpGold;
+            speedUpGold += gold;
         }
         else
             return;
@@ -145,19 +143,22 @@ public class BtnManger : MonoBehaviour
         {
             player.bulletSpeed += 0.1f;
             GameManager.instance.gold -= gold;
-            gold += gold + (int)(gold * 0.5f);
+            gold += gold + Mathf.RoundToInt(gold * 0.5f);
         }
         else
             return;
     }
     public void BulletPowerUpBtn()
     {
-        if (GameManager.instance.gold >= BulletPowerUpCost)
+        int plusGold = 100;
+        if (GameManager.instance.gold >= BulletPowerUpGold)
         {
-            player.bulletDamage += 1;
-            GameManager.instance.gold -= BulletPowerUpCost;
-            BulletPowerUpCost += BulletPowerUpCost;
+            player.bulletDamage++;
+            GameManager.instance.gold -= BulletPowerUpGold;
+            BulletPowerUpGold += plusGold;
         }
+        else
+            return;
     }
 
     //Miner Ui

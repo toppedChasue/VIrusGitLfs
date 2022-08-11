@@ -42,6 +42,12 @@ public class ObjectManager : MonoBehaviour
             case "Basic":
                 targetPool = playerBullet;
                 break;
+            case "TypeA":
+                targetPool = playerBullet;
+                break;
+            case "TypeB":
+                targetPool = playerBullet;
+                break;
             case "Tower":
                 targetPool = TowerBullet;
                 break;
