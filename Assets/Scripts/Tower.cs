@@ -29,17 +29,7 @@ public class Tower : MonoBehaviour
     private void Update()
     {
         currentTime += Time.deltaTime;
-        if (currentTime >= maxTime)
-        {
-            TowerAction();
-        }
     }
-
-    protected void TowerAction()
-    {
-
-    }
-
     void OnDrawGizmos()
     {//감지 범위 그려줌
         Gizmos.color = Color.red;

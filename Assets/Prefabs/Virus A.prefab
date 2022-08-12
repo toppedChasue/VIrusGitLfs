@@ -116,7 +116,7 @@ MonoBehaviour:
   type: 0
   player: {fileID: 0}
   spwanVirus: {fileID: 0}
-  speed: 0.2
-  maxHp: 10
+  inUnbeatable: 0
+  speed: 0.1
   maxDp: 0
   enemyGold: 10

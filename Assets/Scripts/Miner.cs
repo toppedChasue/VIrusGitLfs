@@ -17,6 +17,10 @@ public class Miner : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         mineral = GameObject.Find("GoldPos").GetComponent<Mineral>();
+    }
+
+    private void OnEnable()
+    {
         DigGold();
     }
 
@@ -37,7 +41,7 @@ public class Miner : MonoBehaviour
             currentTime = 0;
         }
     }
-    //광부의 체굴량 증가(goldPower증가)
+    //광부의 체굴량(한번에 캐는 양) 증가(goldPower증가)
     public void GetGoldUP()
     {
         if (GameManager.instance.gold >= goldUPCost)

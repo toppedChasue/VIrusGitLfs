@@ -90,7 +90,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6090431416567766617}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 683469cee94525045bb5a346ef72ff2f, type: 3}
   m_Name: 
@@ -101,4 +101,4 @@ MonoBehaviour:
   maxTime: 0
   towersize: {x: 0, y: 0}
   atk: 0
-  player: {fileID: 0}
+  spwanVirus: {fileID: 0}

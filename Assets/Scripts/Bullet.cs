@@ -4,49 +4,65 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int b_hp = 2;
-
     public float damage;
     public float speed;
     public Transform target;
     public Transform bulletPos;
-    public Transform originPos;
+    private Transform originPos;
 
     private float maxXPos = 15f;
 
     Vector3 dir;
 
+    [SerializeField]
+    private Player player;
+
+    private void Awake()
+    {
+        player = GameObject.FindObjectOfType<Player>();
+        bulletPos = player.bulletPos;
+        transform.position = bulletPos.position;
+    }
+
     private void Start()
     {
-        transform.position = bulletPos.position;
-        originPos = bulletPos;
+        dir = target.position - bulletPos.position;
 
-        dir = target.position - transform.position;
     }
     private void Update()
     {
+
         if (target == null) // 타겟이 없으면 처음 전달 받은 타겟의 위치로 계속 진행
-            Moving();
+            Moving(dir);
 
         else if (target != null)
         {
-            dir = target.position - transform.position;
+            Vector3 dir = target.position - bulletPos.position;
             //타겟이 있으면 방향 정보가 계속 업데이트 되게해서 따라가게 함
-            Moving();
+            Moving(dir);
         }
 
         if (transform.position.x > maxXPos)
         { //총알이 너무 멀리 벗어나지 않게 조절
-            transform.position = originPos.position;
-            //비활성화 전에 위치를 원래 위치로 조정
+
             gameObject.SetActive(false);
         }
     }
 
-    private void Moving()
+    private void Moving(Vector3 dir)
     {
-        transform.position += dir.normalized * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
+        //transform.Translate(dir);
+
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        //transform.position += Vector3.forward * speed * Time.deltaTime;
+        //멀면 빠르고 가까우면 느림
     }
 
+    private void OnDisable()
+    {
+        transform.position = bulletPos.position;
+    }
 
 }

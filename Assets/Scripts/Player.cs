@@ -69,17 +69,16 @@ public class Player : MonoBehaviour
         currentTime = 0;
         for (int i = 0; i < power + 1; i++)
         {
+            AttackEffect(255, -0.02f);
             var obj = objectManager.MakeObj(name);
             bulletObj = obj.GetComponent<Bullet>();
             bulletObj.target = target;
-            bulletObj.bulletPos = bulletPos;
             bulletObj.speed = bulletSpeed;
             bulletObj.damage = bulletDamage;
-
-            AttackEffect(255, -0.01f);
             yield return new WaitForSeconds(0.1f);
-            AttackEffect(255, 0.01f);
+            AttackEffect(0, 0.02f);
         }
+        yield return new WaitForSeconds(0.1f);
     }
 
     private void AttackEffect(byte alpha, float x)
@@ -87,6 +86,7 @@ public class Player : MonoBehaviour
         muzzle.color = new Color32(255, 255, 255, alpha);
         arms.transform.localPosition += new Vector3(x, 0, 0);
     }
+
     void OnDrawGizmos()
     {//감지 범위 그려줌
         Gizmos.color = Color.red;

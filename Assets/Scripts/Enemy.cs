@@ -93,17 +93,12 @@ public class Enemy : MonoBehaviour, IEnemy
 
             if (!inUnbeatable)
             {
-
                 TakeDamage(bullet.damage);
-
                 collision.gameObject.SetActive(false);
-                bullet.transform.position = bullet.originPos.position;
-
             }
             else
             {
                 collision.gameObject.SetActive(false);
-                bullet.transform.position = bullet.originPos.position;
             }
         }
 

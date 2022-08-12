@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectManager : MonoBehaviour
 {
     public Transform bulletParent;
+    public Transform bulletPos;
     public GameObject playerBulletPrefab;
     public GameObject TowerBulletPrefab;
 

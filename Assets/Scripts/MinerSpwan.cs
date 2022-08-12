@@ -55,6 +55,7 @@ public class MinerSpwan : MonoBehaviour
         if (minerCount >= 3)
         {
             minerBtnImg.color = new Color32(80, 80, 80, 255);
+            minerBtnImg.transform.SetAsLastSibling();
             minerbtn.enabled = false;
         }
     }
