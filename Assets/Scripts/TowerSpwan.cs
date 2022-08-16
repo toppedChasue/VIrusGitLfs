@@ -7,14 +7,13 @@ public class TowerSpwan : MonoBehaviour, IBeginDragHandler,IEndDragHandler,IDrag
 {
     //드래그 해서 놓는 법 찾아보자
 
-    public List<Tower> towerList;
+  
     List<Transform> towerPosList;
     public Transform[] towerPos;
-    public Tower[] towerPrefabs;
+
 
     private void Awake()
     {
-        towerList = new List<Tower>();
         towerPosList = new List<Transform>();
     }
 
