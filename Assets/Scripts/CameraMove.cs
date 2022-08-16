@@ -12,7 +12,7 @@ public class CameraMove : MonoBehaviour
     public bool isMoveToMine = false;
     public bool isMoveToMain = false;
 
-    public GameObject goToMineBtn;
+    public GameObject goToMineBtn; //이걸 숨겨야함
     public GameObject goToMainBtn;
 
     public GameObject mainUIGroup;
@@ -24,13 +24,18 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isMoveToMine)
+        CameraWalk();
+    }
+
+    private void CameraWalk()
+    {
+        if (isMoveToMine)
         {
             transform.position = Vector3.MoveTowards(transform.position, mineCameraPos.position, Time.deltaTime * speed);
             if (transform.position == mineCameraPos.position)
                 isMoveToMine = false;
 
-            if(btnManger.playerStats.activeSelf == true || btnManger.playerSkills.activeSelf == true)
+            if (btnManger.playerStats.activeSelf == true || btnManger.playerSkills.activeSelf == true)
             {
                 btnManger.playerStats.SetActive(false);
                 btnManger.playerSkills.SetActive(false);
@@ -53,7 +58,6 @@ public class CameraMove : MonoBehaviour
                 btnManger.isMinerSkill = false;
             }
         }
-
     }
 
     public void GoToMineBtn()
@@ -72,4 +76,6 @@ public class CameraMove : MonoBehaviour
         goToMainBtn.SetActive(false);
         mineUIGroup.SetActive(false);
     }
+
+    
 }

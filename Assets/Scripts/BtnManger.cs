@@ -10,6 +10,8 @@ public class BtnManger : MonoBehaviour
     public GameObject playerTowers;
     public GameObject optionbtn;
 
+    public GameObject gotoMineBtn;
+
     //광산화면 UI
     public GameObject minerStats;
     public GameObject minerSkills;
@@ -40,6 +42,8 @@ public class BtnManger : MonoBehaviour
     public bool isPlayerTower;
     public bool isMinerStats;
     public bool isMinerSkill;
+
+    public bool isMineOpen = false;
 
     //Player UI
     public void PlayerStatsUI()
@@ -114,7 +118,7 @@ public class BtnManger : MonoBehaviour
     //Player Stats
     public void PowerUpBtn()
     {
-        //나중에 스킬 포인트로 바꾸자
+        //나중에 특별한 재화로 바꾸자
         if (GameManager.instance.gold >= powerUpGold && player.power <= 10)
         {
             player.power++;
@@ -126,10 +130,11 @@ public class BtnManger : MonoBehaviour
     }
     public void AtkSpeedUpBtn()
     {
+        //눌럿을때 계속 올라가게끔
         int gold = 200;
         if (GameManager.instance.gold >= speedUpGold)
         {
-            player.attacktTime -= 0.01f;
+            player.attacktTime -= 0.0005f;
             GameManager.instance.gold -= speedUpGold;
             speedUpGold += gold;
         }
@@ -200,6 +205,19 @@ public class BtnManger : MonoBehaviour
             isMinerSkill = false;
             isMinerStats = false;
         }
+    }
+
+    public void MineOpen()
+    {
+        int mineOpenCost = 100000;
+        if (GameManager.instance.gold >= mineOpenCost && isMineOpen == false)
+        {
+            GameManager.instance.gold -= mineOpenCost;
+            isMineOpen = true;
+            gotoMineBtn.SetActive(true);
+        }
+        else
+            return;
     }
 
 }

@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private Player player;
 
+    public Rigidbody2D rigid;
+
     private void Awake()
     {
         player = GameObject.FindObjectOfType<Player>();
@@ -26,38 +28,29 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        dir = target.position - bulletPos.position;
-
+        dir = (target.position - bulletPos.position).normalized;
     }
     private void Update()
     {
-
-        if (target == null) // 타겟이 없으면 처음 전달 받은 타겟의 위치로 계속 진행
-            Moving(dir);
-
-        else if (target != null)
+        if (target != null)
         {
-            Vector3 dir = target.position - bulletPos.position;
-            //타겟이 있으면 방향 정보가 계속 업데이트 되게해서 따라가게 함
-            Moving(dir);
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+            Vector3 dir2 = (target.position - bulletPos.position).normalized;
+            transform.forward = dir2;
         }
+        else if (target == null)
+            Moving();
 
         if (transform.position.x > maxXPos)
         { //총알이 너무 멀리 벗어나지 않게 조절
-
             gameObject.SetActive(false);
         }
     }
 
-    private void Moving(Vector3 dir)
+    private void Moving()
     {
-        transform.position += dir * speed * Time.deltaTime;
-        //transform.Translate(dir);
-
-        //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-        //transform.position += Vector3.forward * speed * Time.deltaTime;
-        //멀면 빠르고 가까우면 느림
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     private void OnDisable()

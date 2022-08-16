@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
     }
-    public SkillManager skillManager;
 
     public int stage;
     public int gold;

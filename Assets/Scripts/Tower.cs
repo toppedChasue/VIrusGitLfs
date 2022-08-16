@@ -15,6 +15,8 @@ public class Tower : MonoBehaviour
     public Vector2 towersize; //범위 - 공격범위, 버프범위
     public int atk; //공격력, 버프수치, 디버프수치, 골드 획득량
 
+    public LayerMask layer;
+
     public SpwanVirus spwanVirus;
 
     //필요한것들
@@ -26,21 +28,24 @@ public class Tower : MonoBehaviour
     //타워가 해야할것
     //공통 - 타겟, 쿨타임, 액션, 증가량
 
-    private void Update()
+    protected virtual void Init()
     {
-        currentTime += Time.deltaTime;
+        maxTime = 0f;
+        towersize = Vector2.zero;
+        atk = 0;
     }
-    void OnDrawGizmos()
-    {//감지 범위 그려줌
-        Gizmos.color = Color.red;
-        switch (type)
-        {
-            case TowerType.ATK:
-                Gizmos.DrawRay(transform.localPosition, Vector3.right);
-                break;
-            case TowerType.BUFF:
-                Gizmos.DrawWireCube(transform.position, towersize);
-                break;
-        }
-    }
+
+    //void OnDrawGizmos()
+    //{//감지 범위 그려줌
+    //    Gizmos.color = Color.red;
+    //    switch (type)
+    //    {
+    //        case TowerType.ATK:
+    //           Gizmos.DrawWireCube(new Vector2(transform.position.x + 8, transform.position.y), towersize);
+    //            break;
+    //        case TowerType.BUFF:
+    //            Gizmos.DrawWireCube(transform.position, towersize);
+    //            break;
+    //    }
+    //}
 }

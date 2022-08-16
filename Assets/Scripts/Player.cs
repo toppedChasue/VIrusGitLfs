@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     private Bullet bulletObj;
     public SpriteRenderer muzzle;
 
+    private void Awake()
+    {
+        power = 1;
+    }
     private void Update()
     {
         SearchVirus();
@@ -67,7 +71,7 @@ public class Player : MonoBehaviour
     public IEnumerator Attack(int power, string name)
     {
         currentTime = 0;
-        for (int i = 0; i < power + 1; i++)
+        for (int i = 0; i < power; i++)
         {
             AttackEffect(255, -0.02f);
             var obj = objectManager.MakeObj(name);

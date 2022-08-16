@@ -52,6 +52,7 @@ public class ObjectManager : MonoBehaviour
             case "Tower":
                 targetPool = TowerBullet;
                 break;
+               
         }
 
         for (int index = 0; index < targetPool.Length; index++)
