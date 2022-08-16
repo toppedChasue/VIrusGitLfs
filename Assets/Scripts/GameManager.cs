@@ -23,4 +23,6 @@ public class GameManager : MonoBehaviour
     public int gold;
     public int skillPoint;
     public int enemyKillCount;
+
+
 }

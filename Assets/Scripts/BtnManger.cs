@@ -20,6 +20,7 @@ public class BtnManger : MonoBehaviour
     public Player player;
     private int powerUpGold;
     private int speedUpGold;
+    private int skillCost;
 
     //총알 관련 변수
     GameObject bulletParent;
@@ -119,11 +120,11 @@ public class BtnManger : MonoBehaviour
     public void PowerUpBtn()
     {
         //나중에 특별한 재화로 바꾸자
-        if (GameManager.instance.gold >= powerUpGold && player.power <= 10)
+        if (GameManager.instance.skillPoint >= skillCost && player.power <= 10)
         {
             player.power++;
-            GameManager.instance.gold -= powerUpGold;
-            powerUpGold += powerUpGold;
+            GameManager.instance.skillPoint -= skillCost;
+            skillCost += skillCost * 2;
         }
         else
             return;
