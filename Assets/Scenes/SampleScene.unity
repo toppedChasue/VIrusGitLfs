@@ -1258,6 +1258,7 @@ MonoBehaviour:
   attacktTime: 1
   objectManager: {fileID: 2060148417}
   muzzle: {fileID: 70828110}
+  spwanVirus: {fileID: 858456726}
 --- !u!1 &151706390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3331,6 +3332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73887089419125c45acc99b2ee54ed6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackTime: 2
+  spwanVirus: {fileID: 858456726}
 --- !u!1 &466130280
 GameObject:
   m_ObjectHideFlags: 0

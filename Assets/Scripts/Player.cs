@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public ObjectManager objectManager;
     private Bullet bulletObj;
     public SpriteRenderer muzzle;
+    public SpwanVirus spwanVirus;
 
     private void Awake()
     {
@@ -38,27 +39,19 @@ public class Player : MonoBehaviour
     }
     public void SearchVirus()
     {
-        Collider2D[] obj = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 9, transform.position.y), size, 0, layer);
-        List<Enemy> enemies = new List<Enemy>();//리스트를 계속 갱신
-        foreach (Collider2D enemycol in obj)
-        {
-            Enemy enemy1 = enemycol.GetComponent<Enemy>();
-            enemies.Add(enemy1);
-        }
-
         currentTime += Time.deltaTime;
 
-        if (enemies != null)
+        if (spwanVirus.enemies != null)
         {
             float shortDis = attackRange;
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < spwanVirus.enemies.Count; i++)
             {
-                float dis = Vector3.Distance(transform.position, enemies[i].transform.position);
+                float dis = Vector3.Distance(transform.position, spwanVirus.enemies[i].transform.position);
                 //타워와 에너미의 거리를 dis변수에 넣어줌
                 if (dis < shortDis)
                 {
                     shortDis = dis;
-                    target = enemies[i].transform;
+                    target = spwanVirus.enemies[i].transform;
                 }//가장 가까운 거리에 있는 적을 타겟으로 넣어줌
             }
             if (target != null && currentTime > attacktTime)
