@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     public float speed;
     public Transform target;
     public Transform bulletPos;
-    private Transform originPos;
 
     private float maxXPos = 15f;
 
@@ -17,7 +16,6 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private Player player;
 
-    public Rigidbody2D rigid;
 
     private void Awake()
     {

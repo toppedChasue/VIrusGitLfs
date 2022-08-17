@@ -9,6 +9,7 @@ public class BtnManger : MonoBehaviour
     public GameObject playerSkills;
     public GameObject playerTowers;
     public GameObject optionbtn;
+    public GameObject optionUI;
 
     public GameObject gotoMineBtn;
 
@@ -18,9 +19,8 @@ public class BtnManger : MonoBehaviour
 
     //플레이어 스탯 관련 변수
     public Player player;
-    private int powerUpGold;
     private int speedUpGold;
-    private int skillCost;
+    private int skillCost = 5;
 
     //총알 관련 변수
     GameObject bulletParent;
@@ -28,7 +28,6 @@ public class BtnManger : MonoBehaviour
 
     private void Awake()
     {
-        powerUpGold = 1000;
         speedUpGold = 50;
         BulletPowerUpGold = 100;
     }
@@ -43,6 +42,7 @@ public class BtnManger : MonoBehaviour
     public bool isPlayerTower;
     public bool isMinerStats;
     public bool isMinerSkill;
+    public bool isOptionUi;
 
     public bool isMineOpen = false;
 
@@ -116,9 +116,24 @@ public class BtnManger : MonoBehaviour
         }
     }
 
+    public void OptionUI()
+    {
+        if(!isOptionUi)
+        {
+            isOptionUi = true;
+            optionUI.SetActive(true);
+        }
+        else if(isOptionUi)
+        {
+            isOptionUi = false;
+            optionUI.SetActive(false);
+        }
+    }
+
     //Player Stats
     public void PowerUpBtn()
     {
+        
         //나중에 특별한 재화로 바꾸자
         if (GameManager.instance.skillPoint >= skillCost && player.power <= 10)
         {

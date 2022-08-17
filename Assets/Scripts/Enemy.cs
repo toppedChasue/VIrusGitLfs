@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour, IEnemy
         if (collision.gameObject.tag == "PlayerBullet")
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-
+            
             if (!inUnbeatable)
             {
                 TakeDamage(bullet.damage);
@@ -115,6 +115,19 @@ public class Enemy : MonoBehaviour, IEnemy
             }
         }
 
+        if (collision.gameObject.tag == "TowerBullet")
+        {
+            TowerBullet towerBullet = collision.gameObject.GetComponent<TowerBullet>();
+            if (!inUnbeatable)
+            {
+                TakeDamage(towerBullet.damage);
+                collision.gameObject.SetActive(false);
+            }
+            else
+            {
+                collision.gameObject.SetActive(false);
+            }
+        }
 
         if (collision.gameObject.tag == "Finish")
         {

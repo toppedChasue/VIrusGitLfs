@@ -7,16 +7,16 @@ public class ObjectManager : MonoBehaviour
     public Transform bulletParent;
     public Transform bulletPos;
     public GameObject playerBulletPrefab;
-    //public GameObject TowerBulletPrefab;
+    public GameObject TowerBulletPrefab;
 
     GameObject[] playerBullet;
-    //GameObject[] TowerBullet;
+    GameObject[] TowerBullet;
 
     GameObject[] targetPool;
     void Awake()
     {
         playerBullet = new GameObject[100];
-        //TowerBullet = new GameObject[60];
+        TowerBullet = new GameObject[60];
 
         Generate();
     }
@@ -28,12 +28,12 @@ public class ObjectManager : MonoBehaviour
             playerBullet[index].transform.SetParent(bulletParent.transform);
             playerBullet[index].SetActive(false);
         }
-        //for (int index = 0; index < TowerBullet.Length; index++)
-        //{
-        //    TowerBullet[index] = Instantiate(TowerBulletPrefab);
-        //    TowerBullet[index].transform.SetParent(bulletParent.transform);
-        //    TowerBullet[index].SetActive(false);
-        //}
+        for (int index = 0; index < TowerBullet.Length; index++)
+        {
+            TowerBullet[index] = Instantiate(TowerBulletPrefab);
+            TowerBullet[index].transform.SetParent(bulletParent.transform);
+            TowerBullet[index].SetActive(false);
+        }
     }
 
     public GameObject MakeObj(string type)
@@ -49,9 +49,9 @@ public class ObjectManager : MonoBehaviour
             case "TypeB":
                 targetPool = playerBullet;
                 break;
-            //case "Tower":
-            //    targetPool = TowerBullet;
-            //    break;
+            case "Tower":
+                targetPool = TowerBullet;
+                break;
                
         }
 

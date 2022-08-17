@@ -15,8 +15,8 @@ public class SpwanVirus : MonoBehaviour
 
     public float waitMadeTime; //하나 생성되고 다시 생성될때까지 쿨타임
     public int enemySpwanCount;
-    public int BossSpwanCount;
-    private int nextBoss;
+    private float BossSpwanCount;
+    public float nextBoss;
 
     public List<Enemy> enemies = new List<Enemy>();
 
@@ -29,13 +29,14 @@ public class SpwanVirus : MonoBehaviour
         isSpwan = true;
         isBossSpwan = false;
         enemySpwanCount = 10;
-        nextBoss = BossSpwanCount;
+        BossSpwanCount = 10;
+        nextBoss = BossSpwanCount * 2;
     }
     private void Update()
     {
         StartStage();
         NextStage();
-        if (GameManager.instance.enemyKillCount == nextBoss)
+        if (GameManager.instance.enemyKillCount >= nextBoss)
         {
             isBossSpwan = true;
             GameManager.instance.enemyKillCount = 0;

@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    public GameObject bullet;
+    public Transform bulletPos;
+
+    public float bulletSpeed;
+    public float bulletDamage;
+
     float currentTime;
     public float attackTime;
     Transform target;
 
     public SpwanVirus spwanVirus;
+    public ObjectManager objectManager;
+    public Player player;
+    TowerBullet bulletObj;
 
-
+    private void Start()
+    {
+        bulletDamage = player.GetComponent<Player>().bulletDamage;
+        bulletSpeed = player.GetComponent<Player>().bulletSpeed;
+    }
     private void Update()
     {
         currentTime += Time.deltaTime;
@@ -32,9 +45,13 @@ public class Tower : MonoBehaviour
             }
             if(target != null && currentTime >= attackTime)
             {
-                Debug.Log("АјАн");
+                var obj = objectManager.MakeObj("Tower");
+                bulletObj = obj.GetComponent<TowerBullet>();
+                bulletObj.target = target;
+                bulletObj.speed = bulletSpeed;
+                bulletObj.damage = bulletDamage;
+                currentTime = 0;
             }
-
         }
     }
 

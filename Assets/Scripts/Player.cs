@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
+
     private void AttackEffect(byte alpha, float x)
     {
         muzzle.color = new Color32(255, 255, 255, alpha);

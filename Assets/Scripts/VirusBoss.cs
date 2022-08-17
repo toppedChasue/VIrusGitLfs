@@ -13,6 +13,7 @@ public class VirusBoss : Enemy
     public float maxTime;
 
     public CircleCollider2D col;
+    Animator anim;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class VirusBoss : Enemy
         player = FindObjectOfType<Player>();
         spwanVirus = FindObjectOfType<SpwanVirus>();
         col = GetComponent<CircleCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -54,12 +56,14 @@ public class VirusBoss : Enemy
 
     IEnumerator HealthUp(float hp, float heal)
     {
+        anim.SetBool("isMoving", false);
         virusFrontSpeed = 0f; //제자리
         virusUpDownSpeed = 0f;
         col.radius = 1f; //콜라이더 크기 확대
         yield return new WaitForSeconds(0.1f);
         CurrentHp = hp + (heal /2); //힐
         yield return new WaitForSeconds(5f);
+        anim.SetBool("isMoving", true);
         currentTime = 0; //쿨타임 초기화
         virusFrontSpeed = speed; //원상복구
         virusUpDownSpeed = speed;
