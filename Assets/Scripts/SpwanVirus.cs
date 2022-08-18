@@ -24,24 +24,24 @@ public class SpwanVirus : MonoBehaviour
     public bool isBossSpwan;
 
     public GameManager gameManager;
-    private void Start()
+
+    //일정 수의 몬스터를 잡으면 보스 등장
+    //보스가 등장할 때 모든 몬스터가 사라져야 함
+    //스테이지는 보스를 죽여야 오름
+
+    private void Awake()
     {
         isSpwan = true;
         isBossSpwan = false;
         enemySpwanCount = 10;
+        nextBoss = 20;
         BossSpwanCount = 10;
-        nextBoss = BossSpwanCount * 2;
     }
     private void Update()
     {
         StartStage();
+        BossSpwanStart();
         NextStage();
-        if (GameManager.instance.enemyKillCount >= nextBoss)
-        {
-            isBossSpwan = true;
-            GameManager.instance.enemyKillCount = 0;
-            nextBoss += BossSpwanCount;
-        }
     }
 
     private void StartStage()
@@ -50,34 +50,43 @@ public class SpwanVirus : MonoBehaviour
         {
             waitMadeTime = 0.3f;
             StartCoroutine(MadeVirus());
-            GameManager.instance.stage++;
         }
-
     }
     private void NextStage()
     {
-        if (enemies.Count == 0)
-        {
+        if (enemies.Count == 0 && !isBossSpwan)
+        {//몬스터 수가 3 이하, 보스 소환이 아닐때
+
             isSpwan = true;
         }
     }
 
+    private void BossSpwanStart()
+    {
+        if (GameManager.instance.enemyKillCount >= nextBoss)
+        {
+            isSpwan = false;
+            isBossSpwan = true;
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                Destroy(enemies[i].gameObject);
+            }
+            enemies.Clear();
+            StopCoroutine(MadeVirus());
+            GameManager.instance.enemyKillCount = 0;
+            nextBoss += BossSpwanCount;
+        }
+        BossSpwan();
+    }
+
     public IEnumerator MadeVirus()
     {
-        List<int> enemyConunt = new List<int>();
+        List<int> enemyConunt = new List<int>(); //소환할 몬스터 갯수
 
         if (isSpwan)
         {
-            if (isBossSpwan)
-            {
-                isSpwan = false;
-                isBossSpwan = false;
-                float ran = Random.Range(spwanArea.position.y - 2f, spwanArea.position.y + 2f);
-                Enemy obj = Instantiate(virusPrefabs[4], spwanArea.position, Quaternion.identity).GetComponent<Enemy>();
-                enemies.Add(obj);
-                yield return new WaitForSeconds(waitMadeTime);
-            }
-            else
+            if (!isBossSpwan)
             {
                 for (int index = 0; index < enemySpwanCount; index++)
                 {
@@ -106,11 +115,24 @@ public class SpwanVirus : MonoBehaviour
             {
                 isSpwan = false;
                 float ran = Random.Range(spwanArea.position.y - 2f, spwanArea.position.y + 2f);
-                Enemy obj = Instantiate(virusPrefabs[enemyConunt[0]], new Vector2(spwanArea.position.x, ran), Quaternion.identity).GetComponent<Enemy>();
+                EnemyA obj = Instantiate(virusPrefabs[enemyConunt[0]], new Vector2(spwanArea.position.x, ran), Quaternion.identity).GetComponent<EnemyA>();
                 enemies.Add(obj);
                 enemyConunt.RemoveAt(0);
                 yield return new WaitForSeconds(waitMadeTime);
             }
+        }
+
+
+    }
+
+    private void BossSpwan()
+    {
+        if (isBossSpwan)
+        {
+            isBossSpwan = false;
+            float ran = Random.Range(spwanArea.position.y - 2f, spwanArea.position.y + 2f);
+            var obj = Instantiate(virusPrefabs[4], spwanArea.position, Quaternion.identity).GetComponent<VirusBoss>();
+            enemies.Add(obj);
         }
     }
 }

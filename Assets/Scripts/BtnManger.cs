@@ -171,12 +171,10 @@ public class BtnManger : MonoBehaviour
     }
     public void BulletPowerUpBtn()
     {
-        int plusGold = 100;
         if (GameManager.instance.gold >= BulletPowerUpGold)
         {
             player.bulletDamage++;
-            GameManager.instance.gold -= BulletPowerUpGold;
-            BulletPowerUpGold += plusGold;
+            GameManager.instance.gold -= BulletPowerUpGold;    
         }
         else
             return;

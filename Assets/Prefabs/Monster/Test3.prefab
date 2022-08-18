@@ -70,9 +70,9 @@ MonoBehaviour:
   player: {fileID: 0}
   spwanVirus: {fileID: 0}
   inUnbeatable: 0
-  speed: 0.2
-  maxDp: 0
-  enemyGold: 10
+  speed: 0.8
+  maxDp: 5
+  enemyGold: 50
 --- !u!58 &-2359415847156170460
 CircleCollider2D:
   m_ObjectHideFlags: 0

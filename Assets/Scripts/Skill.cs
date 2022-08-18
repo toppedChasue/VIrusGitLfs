@@ -4,30 +4,47 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {//일단 스킬은 스탑
-    protected string skillName;
-    protected int skillDmg;
-    protected float coolTime;
-    protected float currentTime;
-    protected float range;
+    public string skillName;
 
-    protected bool isUnlock;
+    public int skillDmg;
+    public float coolDown;
+    public float currentTime;
+    public Transform startPos;
 
-    protected List<Skill> skillList;
-    protected List<Skill> unLockSkillList;
+    public bool isUnlock;
+    public bool isSkillTime;
 
     public Transform target;
+    SpwanVirus spwanVirus;
 
-    Player player;
-
-    private void Start()
+    protected virtual void Init(string name)
     {
-        skillList = new List<Skill>();
-        unLockSkillList = new List<Skill>();
-        player = GetComponent<Player>();
+        spwanVirus = GetComponent<SpwanVirus>();
+        skillDmg = 0;
+        coolDown = 0;
+        skillName = name;
+        this.gameObject.transform.position = startPos.position;
     }
 
-    protected virtual void Init()
+    protected virtual void Action()
     {
-        target = player.target;
+        if(!isSkillTime)
+        currentTime += Time.deltaTime;
+
+        if (currentTime >= coolDown)
+        {
+            isSkillTime = true;
+            currentTime = 0;
+        }
+            
+        if(isSkillTime)
+            SkillStart();
     }
+
+    protected virtual void SkillStart() { }
+
+
+    //쿨타임 돌려서 실행
+    //타겟 위치로
+
 }

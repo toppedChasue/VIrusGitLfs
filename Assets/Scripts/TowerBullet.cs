@@ -22,18 +22,16 @@ public class TowerBullet : MonoBehaviour
         transform.position = bulletPos.position;
     }
 
-    private void Start()
-    {
-        dir = (target.position - bulletPos.position).normalized;
-    }
+    //private void Start()
+    //{
+    //    dir = (target.position - bulletPos.position).normalized;
+    //}
     private void Update()
     {
         if (target != null)
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
-
             Vector3 dir2 = (target.position - bulletPos.position).normalized;
-            transform.forward = dir2;
+            transform.position += dir2 * speed * Time.deltaTime;
         }
         else if (target == null)
             Moving();
@@ -46,7 +44,7 @@ public class TowerBullet : MonoBehaviour
 
     private void Moving()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += transform.right * speed * Time.deltaTime;
     }
 
     private void OnDisable()
