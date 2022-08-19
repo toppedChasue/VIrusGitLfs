@@ -21,13 +21,13 @@ public class Bullet : MonoBehaviour
     {
         player = GameObject.FindObjectOfType<Player>();
         bulletPos = player.bulletPos;
+    }
+
+    private void OnEnable()
+    {
         transform.position = bulletPos.position;
     }
 
-    //private void Start()
-    //{
-    //    dir = (target.position - bulletPos.position).normalized;
-    //}
     private void Update()
     {
         if (target != null)
@@ -49,11 +49,6 @@ public class Bullet : MonoBehaviour
     private void Moving()
     {
         transform.position += transform.right * speed * Time.deltaTime;
-    }
-
-    private void OnDisable()
-    {
-        transform.position = bulletPos.position;
     }
 
 }

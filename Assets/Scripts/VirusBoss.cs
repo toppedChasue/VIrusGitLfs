@@ -18,8 +18,7 @@ public class VirusBoss : Enemy
     private void Awake()
     {
         Init();
-        player = FindObjectOfType<Player>();
-        spwanVirus = FindObjectOfType<SpwanVirus>();
+        spwanVirus = SpwanVirus.instance.gameObject.GetComponent<SpwanVirus>();
         col = GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
     }

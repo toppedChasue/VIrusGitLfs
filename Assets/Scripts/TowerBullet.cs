@@ -21,11 +21,11 @@ public class TowerBullet : MonoBehaviour
         bulletPos = tower.bulletPos;
         transform.position = bulletPos.position;
     }
+    private void OnEnable()
+    {
+        transform.position = bulletPos.position;
+    }
 
-    //private void Start()
-    //{
-    //    dir = (target.position - bulletPos.position).normalized;
-    //}
     private void Update()
     {
         if (target != null)
@@ -46,11 +46,4 @@ public class TowerBullet : MonoBehaviour
     {
         transform.position += transform.right * speed * Time.deltaTime;
     }
-
-    private void OnDisable()
-    {
-        transform.position = bulletPos.position;
-    }
-
-
 }

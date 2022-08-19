@@ -401,7 +401,6 @@ MonoBehaviour:
   enemyName: Boss
   type: 4
   player: {fileID: 0}
-  spwanVirus: {fileID: 0}
   inUnbeatable: 0
   speed: 3
   maxDp: 20
@@ -409,7 +408,7 @@ MonoBehaviour:
   enemyGold: 1000
   currentTime: 0
   maxTime: 10
-  col: {fileID: 3514743577603783332, guid: 579ffbb5dde7a2c4086274d6e46d6d8f, type: 3}
+  col: {fileID: -6545423141398274355}
 --- !u!58 &-6545423141398274355
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -423,9 +422,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: 0.18}
+  m_Offset: {x: 0.32748955, y: 0.1564216}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.863107
 --- !u!1 &1538127483830666338
 GameObject:
   m_ObjectHideFlags: 0

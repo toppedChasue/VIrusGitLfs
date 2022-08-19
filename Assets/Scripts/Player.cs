@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance = null;
+    public static Player Instance()
+    {
+        return instance;
+    }
+
     [SerializeField]
     private GameObject arms;
 
@@ -32,6 +38,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         power = 1;
+        if (instance == null)
+            instance = this;
     }
     private void Update()
     {

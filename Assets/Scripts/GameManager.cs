@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public Player player;
     public SpwanVirus spwanVirus;
+
     private void LateUpdate()
     {
         goldTxt.text = string.Format("{0:n0}", gold);

@@ -21,10 +21,9 @@ public class Enemy : MonoBehaviour, IEnemy
     protected float virusUpDownSpeed;
 
     private Vector3 virusPos; //Virus가 생성되었을 때 위치를 기억하는 변수
-    public Player player;
-    public SpwanVirus spwanVirus;
 
     public bool inUnbeatable;
+    protected SpwanVirus spwanVirus;
 
     public float CurrentHp { get; set; }
     public float MaxHp { get; set; }
@@ -34,8 +33,6 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Awake()
     {
         Init();
-        //player = FindObjectOfType<Player>();
-        spwanVirus = FindObjectOfType<SpwanVirus>();
         inUnbeatable = false;
     }
 
@@ -92,7 +89,7 @@ public class Enemy : MonoBehaviour, IEnemy
                     break;
                     
             }
-            spwanVirus.enemies.Remove(this);
+            SpwanVirus.instance.enemies.Remove(this);
             GameManager.instance.enemyKillCount++;
             Destroy(gameObject);
         }
@@ -129,9 +126,24 @@ public class Enemy : MonoBehaviour, IEnemy
             }
         }
 
+
         if (collision.gameObject.tag == "Finish")
         {
             virusFrontSpeed = 0f;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Skill")
+        {
+            var skill = collision.gameObject.GetComponent<Skill>();
+
+            if (!inUnbeatable)
+            {
+                TakeDamage(skill.skillDmg);
+            }
+            else
+                return;
         }
     }
 }

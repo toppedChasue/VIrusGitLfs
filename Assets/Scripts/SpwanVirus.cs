@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SpwanVirus : MonoBehaviour
 {
+    public static SpwanVirus instance = null;
+    public static SpwanVirus Instance()
+    {
+        return instance;
+    }
+
     public GameObject[] virusPrefabs;
 
     private int virusA;
@@ -18,19 +24,16 @@ public class SpwanVirus : MonoBehaviour
     private float BossSpwanCount;
     public float nextBoss;
 
-    public List<Enemy> enemies = new List<Enemy>();
+    public  List<Enemy> enemies = new List<Enemy>();
 
     public bool isSpwan;
     public bool isBossSpwan;
 
-    public GameManager gameManager;
-
-    //일정 수의 몬스터를 잡으면 보스 등장
-    //보스가 등장할 때 모든 몬스터가 사라져야 함
-    //스테이지는 보스를 죽여야 오름
-
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+
         isSpwan = true;
         isBossSpwan = false;
         enemySpwanCount = 10;

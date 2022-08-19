@@ -11,8 +11,7 @@ public class EnemyA : Enemy
     private void Awake()
     {
         Init();
-        //player = FindObjectOfType<Player>();
-        spwanVirus = FindObjectOfType<SpwanVirus>();
+        spwanVirus = SpwanVirus.instance.gameObject.GetComponent<SpwanVirus>();
     }
 
     protected override void Init()

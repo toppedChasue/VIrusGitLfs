@@ -7,20 +7,17 @@ public class Skill : MonoBehaviour
     public string skillName;
 
     public int skillDmg;
-    public float coolDown;
-    public float currentTime;
-    public Transform startPos;
+    protected float coolDown;
+    protected float currentTime;
+    protected Transform startPos;
 
     public bool isUnlock;
     public bool isSkillTime;
 
-    public Transform target;
-    SpwanVirus spwanVirus;
+    protected Transform target;
 
     protected virtual void Init(string name)
     {
-        spwanVirus = GetComponent<SpwanVirus>();
-        skillDmg = 0;
         coolDown = 0;
         skillName = name;
         this.gameObject.transform.position = startPos.position;
@@ -28,23 +25,23 @@ public class Skill : MonoBehaviour
 
     protected virtual void Action()
     {
-        if(!isSkillTime)
-        currentTime += Time.deltaTime;
-
-        if (currentTime >= coolDown)
+        if(isUnlock)
         {
-            isSkillTime = true;
-            currentTime = 0;
+            if (!isSkillTime)
+                currentTime += Time.deltaTime;
+
+            if (currentTime >= coolDown)
+            {
+                isSkillTime = true;
+                currentTime = 0;
+            }
+
+            if (isSkillTime)
+                SkillStart();
         }
-            
-        if(isSkillTime)
-            SkillStart();
+
     }
 
     protected virtual void SkillStart() { }
-
-
-    //쿨타임 돌려서 실행
-    //타겟 위치로
 
 }
