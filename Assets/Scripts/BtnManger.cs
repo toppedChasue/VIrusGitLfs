@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BtnManger : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class BtnManger : MonoBehaviour
     }
     public void Start()
     {
-       bulletParent = GameObject.Find("BulletParent");
+        bulletParent = GameObject.Find("BulletParent");
     }
 
     //상태변수
@@ -74,7 +75,7 @@ public class BtnManger : MonoBehaviour
         if (!isPlayerSkill)
         {
             isPlayerSkill = true;
-            if(playerStats.activeSelf ==true || playerTowers.activeSelf == true)
+            if (playerStats.activeSelf == true || playerTowers.activeSelf == true)
             {
                 playerStats.SetActive(false);
                 isPlayerStats = false;
@@ -118,12 +119,12 @@ public class BtnManger : MonoBehaviour
 
     public void OptionUI()
     {
-        if(!isOptionUi)
+        if (!isOptionUi)
         {
             isOptionUi = true;
             optionUI.SetActive(true);
         }
-        else if(isOptionUi)
+        else if (isOptionUi)
         {
             isOptionUi = false;
             optionUI.SetActive(false);
@@ -133,8 +134,6 @@ public class BtnManger : MonoBehaviour
     //Player Stats
     public void PowerUpBtn()
     {
-        
-        //나중에 특별한 재화로 바꾸자
         if (GameManager.instance.skillPoint >= skillCost && player.power <= 10)
         {
             player.power++;
@@ -148,6 +147,7 @@ public class BtnManger : MonoBehaviour
     {
         //눌럿을때 계속 올라가게끔
         int gold = 200;
+
         if (GameManager.instance.gold >= speedUpGold)
         {
             player.attacktTime -= 0.0005f;
@@ -160,6 +160,7 @@ public class BtnManger : MonoBehaviour
     public void BulletSpeedUpBtn()
     {
         int gold = speedUpGold;
+
         if (GameManager.instance.gold >= gold)
         {
             player.bulletSpeed += 0.1f;
@@ -173,8 +174,12 @@ public class BtnManger : MonoBehaviour
     {
         if (GameManager.instance.gold >= BulletPowerUpGold)
         {
-            player.bulletDamage++;
-            GameManager.instance.gold -= BulletPowerUpGold;    
+            while (true)
+            {
+                player.bulletDamage++;
+                GameManager.instance.gold -= BulletPowerUpGold;
+            }
+
         }
         else
             return;
