@@ -20,21 +20,33 @@ public class BtnManger : MonoBehaviour
 
     //플레이어 스탯 관련 변수
     public Player player;
-    private int speedUpGold;
-    private int skillCost = 5;
+    public int bulletSpeedUpCost;
+    public int atkSpeedUpCost;
+    public int skillCost;
 
     //총알 관련 변수
-    GameObject bulletParent;
-    private int BulletPowerUpGold;
+    public int BulletPowerUpGold;
+
+
+    public int mineOpenCost;
+
+    //필요한 텍스트가 뭐가있을까
+    //텍스트는 계속 업데이트 되어야함
+    //가지고 있는 돈 >= 비용
+    //비용 += 얼마나 늘려야하는가?
+    //비용은 cost로 표시하고
+    
+
 
     private void Awake()
     {
-        speedUpGold = 50;
+        bulletSpeedUpCost = 50;
+        atkSpeedUpCost = 50;
         BulletPowerUpGold = 100;
+        mineOpenCost = 100000;
     }
     public void Start()
     {
-        bulletParent = GameObject.Find("BulletParent");
     }
 
     //상태변수
@@ -48,18 +60,6 @@ public class BtnManger : MonoBehaviour
     public bool isMineOpen = false;
 
     public bool action;
-
-    public void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            action = true;
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            action = false;
-        }
-    }
 
     //Player UI
     public void PlayerStatsUI()
@@ -145,6 +145,7 @@ public class BtnManger : MonoBehaviour
         }
     }
 
+
     //Player Stats
     public void PowerUpBtn()
     {
@@ -162,28 +163,27 @@ public class BtnManger : MonoBehaviour
         //눌럿을때 계속 올라가게끔
         int gold = 200;
 
-        if(action)
+        if (action)
         {
-            if (GameManager.instance.gold >= speedUpGold)
+            if (GameManager.instance.gold >= atkSpeedUpCost)
             {
                 player.attacktTime -= 0.0005f;
-                GameManager.instance.gold -= speedUpGold;
-                speedUpGold += gold;
+                GameManager.instance.gold -= atkSpeedUpCost;
+                atkSpeedUpCost += gold;
             }
             else
                 return;
         }
-
     }
     public void BulletSpeedUpBtn()
     {
-        int gold = speedUpGold;
+        int gold = bulletSpeedUpCost;
 
         if (GameManager.instance.gold >= gold)
         {
             player.bulletSpeed += 0.1f;
             GameManager.instance.gold -= gold;
-            gold += gold + Mathf.RoundToInt(gold * 0.5f);
+            bulletSpeedUpCost += gold + Mathf.RoundToInt(gold * 0.5f);
         }
         else
             return;
@@ -192,12 +192,8 @@ public class BtnManger : MonoBehaviour
     {
         if (GameManager.instance.gold >= BulletPowerUpGold)
         {
-            while (true)
-            {
-                player.bulletDamage++;
-                GameManager.instance.gold -= BulletPowerUpGold;
-            }
-
+            player.bulletDamage++;
+            GameManager.instance.gold -= BulletPowerUpGold;
         }
         else
             return;
@@ -246,7 +242,7 @@ public class BtnManger : MonoBehaviour
 
     public void MineOpen()
     {
-        int mineOpenCost = 100000;
+
         if (GameManager.instance.gold >= mineOpenCost && isMineOpen == false)
         {
             GameManager.instance.gold -= mineOpenCost;
