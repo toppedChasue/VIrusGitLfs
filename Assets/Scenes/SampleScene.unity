@@ -1741,6 +1741,7 @@ MonoBehaviour:
   isMinerSkill: 0
   isOptionUi: 0
   isMineOpen: 0
+  action: 0
 --- !u!4 &203883177
 Transform:
   m_ObjectHideFlags: 0

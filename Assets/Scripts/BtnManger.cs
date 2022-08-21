@@ -47,6 +47,20 @@ public class BtnManger : MonoBehaviour
 
     public bool isMineOpen = false;
 
+    public bool action;
+
+    public void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            action = true;
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            action = false;
+        }
+    }
+
     //Player UI
     public void PlayerStatsUI()
     {
@@ -148,14 +162,18 @@ public class BtnManger : MonoBehaviour
         //눌럿을때 계속 올라가게끔
         int gold = 200;
 
-        if (GameManager.instance.gold >= speedUpGold)
+        if(action)
         {
-            player.attacktTime -= 0.0005f;
-            GameManager.instance.gold -= speedUpGold;
-            speedUpGold += gold;
+            if (GameManager.instance.gold >= speedUpGold)
+            {
+                player.attacktTime -= 0.0005f;
+                GameManager.instance.gold -= speedUpGold;
+                speedUpGold += gold;
+            }
+            else
+                return;
         }
-        else
-            return;
+
     }
     public void BulletSpeedUpBtn()
     {
@@ -238,5 +256,4 @@ public class BtnManger : MonoBehaviour
         else
             return;
     }
-
 }
