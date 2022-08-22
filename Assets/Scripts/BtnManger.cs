@@ -14,6 +14,9 @@ public class BtnManger : MonoBehaviour
 
     public GameObject gotoMineBtn;
 
+    public Button mineOpenBtn;
+    public Image mineOpenImg;
+
     //광산화면 UI
     public GameObject minerStats;
     public GameObject minerSkills;
@@ -25,7 +28,7 @@ public class BtnManger : MonoBehaviour
     public int skillCost;
 
     //총알 관련 변수
-    public int BulletPowerUpGold;
+    public int BulletPowerUpCost;
 
 
     public int mineOpenCost;
@@ -35,14 +38,17 @@ public class BtnManger : MonoBehaviour
     //가지고 있는 돈 >= 비용
     //비용 += 얼마나 늘려야하는가?
     //비용은 cost로 표시하고
-    
+
+    //애초에 여기는 버튼만 켜고 꺼는거로 했어야했다
+    //변수는 따로 스크립트 만들어서 관리했어야지
+    //나중에 다시 옮겨야겠다.
 
 
     private void Awake()
     {
         bulletSpeedUpCost = 50;
         atkSpeedUpCost = 50;
-        BulletPowerUpGold = 100;
+        BulletPowerUpCost = 100;
         mineOpenCost = 100000;
     }
     public void Start()
@@ -162,18 +168,14 @@ public class BtnManger : MonoBehaviour
     {
         //눌럿을때 계속 올라가게끔
         int gold = 200;
-
-        if (action)
+        if (GameManager.instance.gold >= atkSpeedUpCost)
         {
-            if (GameManager.instance.gold >= atkSpeedUpCost)
-            {
-                player.attacktTime -= 0.0005f;
-                GameManager.instance.gold -= atkSpeedUpCost;
-                atkSpeedUpCost += gold;
-            }
-            else
-                return;
+            player.attacktTime -= 0.0005f;
+            GameManager.instance.gold -= atkSpeedUpCost;
+            atkSpeedUpCost += gold;
         }
+        else
+            return;
     }
     public void BulletSpeedUpBtn()
     {
@@ -190,10 +192,11 @@ public class BtnManger : MonoBehaviour
     }
     public void BulletPowerUpBtn()
     {
-        if (GameManager.instance.gold >= BulletPowerUpGold)
+        if (GameManager.instance.gold >= BulletPowerUpCost)
         {
             player.bulletDamage++;
-            GameManager.instance.gold -= BulletPowerUpGold;
+            GameManager.instance.gold -= BulletPowerUpCost;
+            BulletPowerUpCost += 10;
         }
         else
             return;
@@ -248,6 +251,11 @@ public class BtnManger : MonoBehaviour
             GameManager.instance.gold -= mineOpenCost;
             isMineOpen = true;
             gotoMineBtn.SetActive(true);
+
+            mineOpenImg.color = new Color32(80, 80, 80, 255);
+            mineOpenImg.transform.SetAsLastSibling();
+            mineOpenBtn.enabled = false;
+           
         }
         else
             return;

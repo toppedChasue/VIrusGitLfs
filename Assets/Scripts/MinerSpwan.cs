@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class MinerSpwan : MonoBehaviour
 {
+    //광부 소환관련 변수
     public GameObject[] minerPos;
     public GameObject minerPrefab;
 
     public Button minerbtn;
     public Image minerBtnImg;
 
-    private int minerCount;
+    [HideInInspector]
+    public int minerCount;
+    [HideInInspector]
     private int minerCost;
 
-    public GameManager gameManager;
+
+    
     private void Update()
     {
         MinerCheck();
@@ -22,7 +26,7 @@ public class MinerSpwan : MonoBehaviour
     public void SpwanMiner()
     {
         minerCost = 200;
-        if(gameManager.gold >= minerCost)
+        if(GameManager.instance.gold >= minerCost)
         {
             switch (minerCount)
             {
@@ -49,7 +53,6 @@ public class MinerSpwan : MonoBehaviour
         }
 
     }
-
     private void MinerCheck()
     {
         if (minerCount >= 3)
@@ -59,4 +62,6 @@ public class MinerSpwan : MonoBehaviour
             minerbtn.enabled = false;
         }
     }
+    
+
 }

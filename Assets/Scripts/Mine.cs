@@ -8,6 +8,14 @@ public class Mine : Miner
     {
         Init();
     }
+
+
+    private void Update()
+    {
+        currentTime += Time.deltaTime;
+        DigGold(goldPower);
+        Debug.Log(goldPower);
+    }
     protected override void Init()
     {
         base.Init();
